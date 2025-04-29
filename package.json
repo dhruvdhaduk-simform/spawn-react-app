@@ -1,0 +1,46 @@
+{
+    "name": "mkreact",
+    "version": "1.0.0",
+    "description": "A fast and minimal CLI tool to scaffold modern React projects powered by Vite.",
+    "scripts": {
+        "clean": "rm -rf dist",
+        "copy-templates": "mkdir -p dist && cp -r vite-react-ts dist",
+        "build": "npm run clean && npm run copy-templates && npx tsc",
+        "dev": "npm run clean && npm run copy-templates && npx tsc --watch",
+        "start": "node dist/src/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dhruvdhaduk-simform/mkreact.git"
+    },
+    "keywords": [
+        "react",
+        "vite",
+        "cli",
+        "scaffold",
+        "starter",
+        "template",
+        "boilerplate",
+        "mkreact",
+        "typescript",
+        "tailwind",
+        "shadcn",
+        "project-generator"
+    ],
+    "author": "Dhruv Dhaduk",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/dhruvdhaduk-simform/mkreact/issues"
+    },
+    "homepage": "https://github.com/dhruvdhaduk-simform/mkreact#readme",
+    "devDependencies": {
+        "@types/ejs": "^3.1.5",
+        "@types/node": "^22.15.3",
+        "@types/prompts": "^2.4.9",
+        "typescript": "^5.8.3"
+    },
+    "dependencies": {
+        "ejs": "^3.1.10",
+        "prompts": "^2.4.2"
+    }
+}
