@@ -1,5 +1,5 @@
 {
-    "name": "mkreact",
+    "name": "spawn-react-app",
     "version": "1.0.0",
     "description": "A fast and minimal CLI tool to scaffold modern React projects powered by Vite.",
     "scripts": {
@@ -11,7 +11,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/dhruvdhaduk-simform/mkreact.git"
+        "url": "git+https://github.com/dhruvdhaduk-simform/spawn-react-app.git"
     },
     "keywords": [
         "react",
@@ -21,7 +21,7 @@
         "starter",
         "template",
         "boilerplate",
-        "mkreact",
+        "spawn-react-app",
         "typescript",
         "tailwind",
         "shadcn",
@@ -30,9 +30,9 @@
     "author": "Dhruv Dhaduk",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/dhruvdhaduk-simform/mkreact/issues"
+        "url": "https://github.com/dhruvdhaduk-simform/spawn-react-app/issues"
     },
-    "homepage": "https://github.com/dhruvdhaduk-simform/mkreact#readme",
+    "homepage": "https://github.com/dhruvdhaduk-simform/spawn-react-app#readme",
     "devDependencies": {
         "@types/ejs": "^3.1.5",
         "@types/node": "^22.15.3",
