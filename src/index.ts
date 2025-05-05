@@ -1,4 +1,5 @@
 #!/usr/bin/env node
 
-console.log(`__dirname = ${__dirname}`);
-console.log(`process.cwd() = ${process.cwd()}`);
+console.log('-- [LOG]: Hello, World.');
+console.log(`-- [LOG]: __dirname = ${__dirname}`);
+console.log(`-- [LOG]: process.cwd() = ${process.cwd()}`);
