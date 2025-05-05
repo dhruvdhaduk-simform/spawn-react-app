@@ -1,0 +1,53 @@
+{
+    "name": "spawn-react-app",
+    "version": "0.1.0",
+    "description": "A fast and minimal CLI tool to scaffold modern React projects powered by Vite.",
+    "bin": {
+        "spawn-react-app": "dist/src/index.js"
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "clean": "rm -rf dist",
+        "copy-templates": "mkdir -p dist && cp -r vite-react-ts dist",
+        "build": "npm run clean && npm run copy-templates && npx tsc",
+        "dev": "npm run clean && npm run copy-templates && npx tsc --watch",
+        "start": "node dist/src/index.js",
+        "pack": "npm run build && bash ./scripts/pack.sh"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dhruvdhaduk-simform/spawn-react-app.git"
+    },
+    "keywords": [
+        "react",
+        "vite",
+        "cli",
+        "scaffold",
+        "starter",
+        "template",
+        "boilerplate",
+        "spawn-react-app",
+        "typescript",
+        "tailwind",
+        "shadcn",
+        "project-generator"
+    ],
+    "author": "Dhruv Dhaduk",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/dhruvdhaduk-simform/spawn-react-app/issues"
+    },
+    "homepage": "https://github.com/dhruvdhaduk-simform/spawn-react-app#readme",
+    "devDependencies": {
+        "@types/ejs": "^3.1.5",
+        "@types/node": "^22.15.3",
+        "@types/prompts": "^2.4.9",
+        "typescript": "^5.8.3"
+    },
+    "dependencies": {
+        "ejs": "^3.1.10",
+        "prompts": "^2.4.2"
+    }
+}
