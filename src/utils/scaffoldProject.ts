@@ -33,4 +33,9 @@ export function scaffoldProject(userPrompts: UserPrompts): void {
     );
 
     logSuccess(`Initialized your React project at ${projectDir}`);
+    console.log();
+    console.log('  Now run :');
+    console.log(`    cd ${userPrompts.projectName}`);
+    console.log('    npm install');
+    console.log('    npm run dev');
 }
