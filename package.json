@@ -1,6 +1,6 @@
 {
     "name": "spawn-react-app",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "A fast and minimal CLI tool to scaffold modern React projects powered by Vite.",
     "bin": {
         "spawn-react-app": "dist/src/index.js"
