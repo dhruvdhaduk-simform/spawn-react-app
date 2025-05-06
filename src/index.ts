@@ -1,16 +1,17 @@
 #!/usr/bin/env node
 
+import { logError } from './utils/logger';
 import { promptUser } from './utils/promptUser';
 import { scaffoldProject } from './utils/scaffoldProject';
 
-promptUser()
-    .then((response) => {
+async function main() {
+    try {
+        const response = await promptUser();
         scaffoldProject(response);
-    })
-    .catch((err: unknown) => {
-        if (err instanceof Error) {
-            console.error(err.message);
-        } else {
-            console.error(err);
-        }
-    });
+    } catch (err: unknown) {
+        if (err instanceof Error) logError(`[ERROR]: ${err.message}`);
+        else logError(`[ERROR]: ${err}`);
+    }
+}
+
+main();
