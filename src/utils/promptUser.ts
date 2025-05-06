@@ -14,6 +14,10 @@ export async function promptUser(): Promise<UserPrompts> {
         },
     });
 
+    if (typeof projectNameResponse.projectName !== 'string') {
+        throw new TypeError('Please provide the project name.');
+    }
+
     console.log();
 
     const languageResponse = await prompts({
@@ -33,6 +37,7 @@ export async function promptUser(): Promise<UserPrompts> {
         );
         console.log();
     }
+
 
     return {
         projectName: projectNameResponse.projectName,
