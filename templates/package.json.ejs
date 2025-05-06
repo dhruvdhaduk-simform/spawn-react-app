@@ -1,5 +1,5 @@
 {
-    "name": "vite-react-ts",
+    <% if (data.projectName) { %>"name": "<%= data.projectName %>",<% } else { %>"name": "vite-react-ts",<% } %>
     "private": true,
     "version": "0.0.0",
     "type": "module",
