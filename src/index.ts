@@ -1,5 +1,17 @@
 #!/usr/bin/env node
 
-console.log('-- [LOG]: Hello, World.');
-console.log(`-- [LOG]: __dirname = ${__dirname}`);
-console.log(`-- [LOG]: process.cwd() = ${process.cwd()}`);
+import { logError } from './utils/logger';
+import { promptUser } from './utils/promptUser';
+import { scaffoldProject } from './utils/scaffoldProject';
+
+async function main() {
+    try {
+        const response = await promptUser();
+        scaffoldProject(response);
+    } catch (err: unknown) {
+        if (err instanceof Error) logError(`[ERROR]: ${err.message}`);
+        else logError(`[ERROR]: ${err}`);
+    }
+}
+
+main();

@@ -1,6 +1,6 @@
 {
     "name": "spawn-react-app",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "A fast and minimal CLI tool to scaffold modern React projects powered by Vite.",
     "bin": {
         "spawn-react-app": "dist/src/index.js"
@@ -10,7 +10,7 @@
     ],
     "scripts": {
         "clean": "rm -rf dist",
-        "copy-templates": "mkdir -p dist && cp -r vite-react-ts dist",
+        "copy-templates": "mkdir -p dist && cp -r vite-react-ts dist && cp -r templates dist",
         "build": "npm run clean && npm run copy-templates && npx tsc",
         "dev": "npm run clean && npm run copy-templates && npx tsc --watch",
         "start": "node dist/src/index.js",
