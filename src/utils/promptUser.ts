@@ -38,7 +38,6 @@ export async function promptUser(): Promise<UserPrompts> {
         console.log();
     }
 
-
     return {
         projectName: projectNameResponse.projectName,
     };
