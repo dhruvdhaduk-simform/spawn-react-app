@@ -6,6 +6,7 @@ import {
     renderPackageJson,
     renderReadme,
 } from './renderTemplates';
+import { logSuccess } from './logger';
 
 export function scaffoldProject(userPrompts: UserPrompts): void {
     const projectDir = path.join(process.cwd(), userPrompts.projectName);
@@ -31,9 +32,5 @@ export function scaffoldProject(userPrompts: UserPrompts): void {
         renderReadme(userPrompts.projectName)
     );
 
-    console.log();
-    // console.log(`Initialized your React project at ${projectDir}`);
-    console.log(
-        `\u001b[32m Initialized your React project at ${projectDir} \u001b[0m`
-    );
+    logSuccess(`Initialized your React project at ${projectDir}`);
 }

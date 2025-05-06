@@ -1,5 +1,6 @@
 import type { UserPrompts } from '../interfaces';
 import prompts from 'prompts';
+import { logError } from './logger';
 
 export async function promptUser(): Promise<UserPrompts> {
     const projectNameResponse = await prompts({
@@ -32,9 +33,7 @@ export async function promptUser(): Promise<UserPrompts> {
 
     console.log();
     if (languageResponse.language !== 'TypeScript') {
-        console.log(
-            '\u001b[31m Wrong answer. Using TypeScript instead.\u001b[0m'
-        );
+        logError('Wrong answer. Using TypeScript instead.');
         console.log();
     }
 
