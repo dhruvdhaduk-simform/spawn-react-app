@@ -18,6 +18,10 @@ export function scaffoldProject(userPrompts: UserPrompts): void {
     }
 
     fs.cpSync(viteTemplateDir, projectDir, { recursive: true });
+    fs.renameSync(
+        path.join(projectDir, '_gitignore'),
+        path.join(projectDir, '.gitignore')
+    );
 
     fs.writeFileSync(
         path.join(projectDir, 'index.html'),
