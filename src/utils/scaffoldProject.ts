@@ -22,6 +22,10 @@ export function scaffoldProject(userPrompts: UserPrompts): void {
         path.join(projectDir, '_gitignore'),
         path.join(projectDir, '.gitignore')
     );
+    fs.renameSync(
+        path.join(projectDir, '_prettierrc'),
+        path.join(projectDir, '.prettierrc')
+    );
 
     fs.writeFileSync(
         path.join(projectDir, 'index.html'),
