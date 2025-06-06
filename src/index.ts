@@ -7,8 +7,7 @@ import { scaffoldProject } from './utils/scaffoldProject';
 async function main() {
     try {
         const response = await promptUser();
-        console.log(response);
-        // scaffoldProject(response);
+        scaffoldProject(response);
     } catch (err: unknown) {
         if (err instanceof Error) logError(`[ERROR]: ${err.message}`);
         else logError(`[ERROR]: ${err}`);
