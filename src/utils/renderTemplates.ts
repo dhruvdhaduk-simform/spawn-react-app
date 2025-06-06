@@ -14,13 +14,16 @@ export function renderIndexHtml(projectName?: string): string {
     return indexHtml;
 }
 
-export function renderPackageJson(projectName?: string): string {
+export function renderPackageJson(
+    projectName?: string,
+    useTailwind?: boolean
+): string {
     const packageJsonTemplate = fs
         .readFileSync(path.join(__dirname, '../../templates/package.json.ejs'))
         .toString();
 
     const packageJson = ejs.render(packageJsonTemplate, {
-        data: { projectName },
+        data: { projectName, useTailwind },
     });
 
     return packageJson;
@@ -36,4 +39,30 @@ export function renderReadme(projectName?: string): string {
     });
 
     return readme;
+}
+
+export function renderViteConfigTs(useTailwind?: boolean): string {
+    const viteConfigTsTemplate = fs
+        .readFileSync(
+            path.join(__dirname, '../../templates/vite.config.ts.ejs')
+        )
+        .toString();
+
+    const viteConfigTs = ejs.render(viteConfigTsTemplate, {
+        data: { useTailwind },
+    });
+
+    return viteConfigTs;
+}
+
+export function renderIndexCSS(useTailwind?: boolean): string {
+    const indexCssTemplate = fs
+        .readFileSync(path.join(__dirname, '../../templates/index.css.ejs'))
+        .toString();
+
+    const indexCSS = ejs.render(indexCssTemplate, {
+        data: { useTailwind },
+    });
+
+    return indexCSS;
 }

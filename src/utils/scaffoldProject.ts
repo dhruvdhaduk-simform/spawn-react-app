@@ -5,6 +5,8 @@ import {
     renderIndexHtml,
     renderPackageJson,
     renderReadme,
+    renderViteConfigTs,
+    renderIndexCSS,
 } from './renderTemplates';
 import { logSuccess } from './logger';
 
@@ -33,11 +35,19 @@ export function scaffoldProject(userPrompts: UserPrompts): void {
     );
     fs.writeFileSync(
         path.join(projectDir, 'package.json'),
-        renderPackageJson(userPrompts.projectName)
+        renderPackageJson(userPrompts.projectName, userPrompts.tailwind)
     );
     fs.writeFileSync(
         path.join(projectDir, 'README.md'),
         renderReadme(userPrompts.projectName)
+    );
+    fs.writeFileSync(
+        path.join(projectDir, 'vite.config.ts'),
+        renderViteConfigTs(userPrompts.tailwind)
+    );
+    fs.writeFileSync(
+        path.join(projectDir, 'src', 'index.css'),
+        renderIndexCSS(userPrompts.tailwind)
     );
 
     logSuccess(`Initialized your React project at ${projectDir}`);

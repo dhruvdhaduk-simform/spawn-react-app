@@ -32,12 +32,31 @@ export async function promptUser(): Promise<UserPrompts> {
     });
 
     console.log();
+
+    if (!languageResponse.language) {
+        throw new Error('Aborted');
+    }
+
     if (languageResponse.language !== 'TypeScript') {
         logError('Wrong answer. Using TypeScript instead.');
         console.log();
     }
 
+    const tailwindResponse = await prompts({
+        type: 'confirm',
+        name: 'tailwind',
+        message: 'Do you want to use TailwindCSS ?',
+        initial: true,
+    });
+
+    console.log();
+
+    if (tailwindResponse.tailwind === undefined) {
+        throw new Error('Aborted.');
+    }
+
     return {
         projectName: projectNameResponse.projectName,
+        tailwind: tailwindResponse.tailwind,
     };
 }
