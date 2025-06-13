@@ -7,6 +7,7 @@ import { renderPackageJson } from '../templates/packageJson';
 import { renderReadme } from '../templates/readme';
 import { renderViteConfigTs } from '../templates/viteConfig';
 import { renderIndexCSS } from '../templates/indexCSS';
+import { renderComponentsJson, renderSrcLibUtils } from '../templates/shadcn';
 
 import { logSuccess } from './logger';
 
@@ -35,7 +36,11 @@ export function scaffoldProject(userPrompts: UserPrompts): void {
     );
     fs.writeFileSync(
         path.join(projectDir, 'package.json'),
-        renderPackageJson(userPrompts.projectName, userPrompts.tailwind)
+        renderPackageJson(
+            userPrompts.projectName,
+            userPrompts.tailwind,
+            userPrompts.shadcn
+        )
     );
     fs.writeFileSync(
         path.join(projectDir, 'README.md'),
@@ -47,8 +52,20 @@ export function scaffoldProject(userPrompts: UserPrompts): void {
     );
     fs.writeFileSync(
         path.join(projectDir, 'src', 'index.css'),
-        renderIndexCSS(userPrompts.tailwind)
+        renderIndexCSS(userPrompts.tailwind, userPrompts.shadcn)
     );
+
+    if (userPrompts.shadcn) {
+        fs.writeFileSync(
+            path.join(projectDir, 'components.json'),
+            renderComponentsJson()
+        );
+
+        const libDir = path.join(projectDir, 'src', 'lib');
+        fs.mkdirSync(libDir, { recursive: true });
+
+        fs.writeFileSync(path.join(libDir, 'utils.ts'), renderSrcLibUtils());
+    }
 
     logSuccess(`Initialized your React project at ${projectDir}`);
     console.log();
