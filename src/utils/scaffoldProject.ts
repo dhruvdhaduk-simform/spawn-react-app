@@ -17,6 +17,10 @@ import {
     renderUseAppDispatch,
     renderUseAppSelector,
 } from '../templates/redux';
+import {
+    renderNetlifyRedirect,
+    renderVercelRedirect,
+} from '../templates/redirect';
 
 import { logSuccess } from './logger';
 
@@ -115,6 +119,24 @@ export function scaffoldProject(userPrompts: UserPrompts): void {
         fs.writeFileSync(
             path.join(hooksDir, 'useAppSelector.ts'),
             renderUseAppSelector()
+        );
+    }
+
+    if (userPrompts.redirect.netlify) {
+        const publicDir = path.join(projectDir, 'public');
+
+        fs.mkdirSync(publicDir, { recursive: true });
+
+        fs.writeFileSync(
+            path.join(publicDir, '_redirects'),
+            renderNetlifyRedirect()
+        );
+    }
+
+    if (userPrompts.redirect.vercel) {
+        fs.writeFileSync(
+            path.join(projectDir, 'vercel.json'),
+            renderVercelRedirect()
         );
     }
 
