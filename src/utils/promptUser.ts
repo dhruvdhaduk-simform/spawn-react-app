@@ -73,9 +73,22 @@ export async function promptUser(): Promise<UserPrompts> {
         useShadCN = shadcnResponse.shadcn;
     }
 
+    const routerResponse = await prompts({
+        type: 'confirm',
+        name: 'router',
+        message: 'Do you want to use React Router ?',
+        initial: true,
+    });
+    console.log();
+
+    if (routerResponse.router === undefined) {
+        throw new Error('Aborted.');
+    }
+
     return {
         projectName: projectNameResponse.projectName,
         tailwind: tailwindResponse.tailwind,
         shadcn: useShadCN,
+        router: routerResponse.router,
     };
 }
