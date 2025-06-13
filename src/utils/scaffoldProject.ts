@@ -11,6 +11,12 @@ import { renderComponentsJson, renderSrcLibUtils } from '../templates/shadcn';
 import { renderRouterTsx } from '../templates/router';
 import { renderMainTsx } from '../templates/mainTsx';
 import { renderAppTsx } from '../templates/appTsx';
+import { renderEslintConfig } from '../templates/eslintConfig';
+import {
+    renderStore,
+    renderUseAppDispatch,
+    renderUseAppSelector,
+} from '../templates/redux';
 
 import { logSuccess } from './logger';
 
@@ -47,7 +53,8 @@ export function scaffoldProject(userPrompts: UserPrompts): void {
             userPrompts.projectName,
             userPrompts.tailwind,
             userPrompts.shadcn,
-            userPrompts.router
+            userPrompts.router,
+            userPrompts.redux
         )
     );
     fs.writeFileSync(
@@ -77,7 +84,7 @@ export function scaffoldProject(userPrompts: UserPrompts): void {
 
     fs.writeFileSync(
         path.join(srcDir, 'main.tsx'),
-        renderMainTsx(userPrompts.router)
+        renderMainTsx(userPrompts.router, userPrompts.redux)
     );
     fs.writeFileSync(
         path.join(srcDir, 'App.tsx'),
@@ -86,6 +93,29 @@ export function scaffoldProject(userPrompts: UserPrompts): void {
 
     if (userPrompts.router) {
         fs.writeFileSync(path.join(srcDir, 'router.tsx'), renderRouterTsx());
+    }
+
+    fs.writeFileSync(
+        path.join(projectDir, 'eslint.config.js'),
+        renderEslintConfig(userPrompts.redux)
+    );
+
+    if (userPrompts.redux) {
+        const appDir = path.join(srcDir, 'app');
+        const hooksDir = path.join(srcDir, 'hooks');
+
+        fs.mkdirSync(appDir, { recursive: true });
+        fs.mkdirSync(hooksDir, { recursive: true });
+
+        fs.writeFileSync(path.join(appDir, 'store.ts'), renderStore());
+        fs.writeFileSync(
+            path.join(hooksDir, 'useAppDispatch.ts'),
+            renderUseAppDispatch()
+        );
+        fs.writeFileSync(
+            path.join(hooksDir, 'useAppSelector.ts'),
+            renderUseAppSelector()
+        );
     }
 
     logSuccess(`Initialized your React project at ${projectDir}`);
