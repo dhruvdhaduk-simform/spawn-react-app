@@ -26,11 +26,11 @@
 npx spawn-react-app@latest
 ```
 
-### Checkout latest changes from `dev` branch
+### Checkout latest changes from `main` branch
 
--   You can easily checkout latest push on `dev` branch which has not been released yet.
+-   You can easily checkout latest push on `main` branch which has not been released yet.
 -   For that, run this command inside your terminal,
 
 ```bash
-bash -c "$(curl -fsSL https://dev--spawn-react-app.netlify.app/run.sh)" -- https://dev--spawn-react-app.netlify.app/spawn-react-app.tgz
+bash -c "$(curl -fsSL https://spawn-react-app.netlify.app/run.sh)" -- https://spawn-react-app.netlify.app/spawn-react-app.tgz
 ```
