@@ -55,8 +55,27 @@ export async function promptUser(): Promise<UserPrompts> {
         throw new Error('Aborted.');
     }
 
+    let useShadCN = false;
+
+    if (tailwindResponse.tailwind) {
+        const shadcnResponse = await prompts({
+            type: 'confirm',
+            name: 'shadcn',
+            message: 'Do you want ot use ShadCN ?',
+            initial: true,
+        });
+        console.log();
+
+        if (shadcnResponse.shadcn === undefined) {
+            throw new Error('Aborted.');
+        }
+
+        useShadCN = shadcnResponse.shadcn;
+    }
+
     return {
         projectName: projectNameResponse.projectName,
         tailwind: tailwindResponse.tailwind,
+        shadcn: useShadCN,
     };
 }
