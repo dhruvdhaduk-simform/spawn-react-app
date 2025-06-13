@@ -1,4 +1,9 @@
-export function renderPackageJson(projectName: string = 'vite-react-ts', useTailwind?: boolean) {
+export function renderPackageJson(projectName: string = 'vite-react-ts', useTailwind?: boolean, useShadCN?: boolean) {
+
+    if (!useTailwind) {
+        useShadCN = false;
+    }
+
     return (
 `{
     "name": "${projectName}",
@@ -12,9 +17,9 @@ export function renderPackageJson(projectName: string = 'vite-react-ts', useTail
         "preview": "vite preview",
         "format": "prettier . --write"
     },
-    "dependencies": {${useTailwind ? `\n        "@tailwindcss/vite": "^4.1.8",` : ''}
+    "dependencies": {${useTailwind ? `\n        "@tailwindcss/vite": "^4.1.8",` : ''}${useShadCN ? `\n        "class-variance-authority": "^0.7.1",\n        "clsx": "^2.1.1",\n        "lucide-react": "^0.514.0",` : ''}
         "react": "^19.0.0",
-        "react-dom": "^19.0.0"${useTailwind ? ',\n        "tailwindcss": "^4.1.8"' : ''}
+        "react-dom": "^19.0.0"${useTailwind ? ',' : ''}${useShadCN ? `\n        "tailwind-merge": "^3.3.1",` : ''}${useTailwind ? '\n        "tailwindcss": "^4.1.8"' : ''}
     },
     "devDependencies": {
         "@eslint/js": "^9.22.0",
@@ -25,7 +30,7 @@ export function renderPackageJson(projectName: string = 'vite-react-ts', useTail
         "eslint-plugin-react-hooks": "^5.2.0",
         "eslint-plugin-react-refresh": "^0.4.19",
         "globals": "^16.0.0",
-        "prettier": "^3.5.3",
+        "prettier": "^3.5.3",${useShadCN ? `\n        "tw-animate-css": "^1.3.4",` : ''}
         "typescript": "~5.7.2",
         "typescript-eslint": "^8.26.1",
         "vite": "^6.3.1"
