@@ -1,5 +1,7 @@
-{
-    <% if (data.projectName) { %>"name": "<%= data.projectName %>",<% } else { %>"name": "vite-react-ts",<% } %>
+export function renderPackageJson(projectName: string = 'vite-react-ts', useTailwind?: boolean) {
+    return (
+`{
+    "name": "${projectName}",
     "private": true,
     "version": "0.0.0",
     "type": "module",
@@ -10,9 +12,9 @@
         "preview": "vite preview",
         "format": "prettier . --write"
     },
-    "dependencies": {<% if (data.useTailwind) { %><%="\n        "%>"@tailwindcss/vite": "^4.1.8",<% } else { %><% } %>
+    "dependencies": {${useTailwind ? `\n        "@tailwindcss/vite": "^4.1.8",` : ''}
         "react": "^19.0.0",
-        "react-dom": "^19.0.0"<% if (data.useTailwind) { %>,<%="\n        "%>"tailwindcss": "^4.1.8"<% } else { %><% } %>
+        "react-dom": "^19.0.0"${useTailwind ? ',\n        "tailwindcss": "^4.1.8"' : ''}
     },
     "devDependencies": {
         "@eslint/js": "^9.22.0",
@@ -28,4 +30,6 @@
         "typescript-eslint": "^8.26.1",
         "vite": "^6.3.1"
     }
+}
+`)
 }

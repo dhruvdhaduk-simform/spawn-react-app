@@ -1,13 +1,13 @@
 import type { UserPrompts } from '../interfaces';
 import fs from 'fs';
 import path from 'path';
-import {
-    renderIndexHtml,
-    renderPackageJson,
-    renderReadme,
-    renderViteConfigTs,
-    renderIndexCSS,
-} from './renderTemplates';
+
+import { renderIndexHtml } from '../templates/indexHTML';
+import { renderPackageJson } from '../templates/packageJson';
+import { renderReadme } from '../templates/readme';
+import { renderViteConfigTs } from '../templates/viteConfig';
+import { renderIndexCSS } from '../templates/indexCSS';
+
 import { logSuccess } from './logger';
 
 export function scaffoldProject(userPrompts: UserPrompts): void {
