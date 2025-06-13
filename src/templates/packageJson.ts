@@ -1,4 +1,4 @@
-export function renderPackageJson(projectName: string = 'vite-react-ts', useTailwind?: boolean, useShadCN?: boolean) {
+export function renderPackageJson(projectName: string = 'vite-react-ts', useTailwind?: boolean, useShadCN?: boolean, useRouter?: boolean) {
 
     if (!useTailwind) {
         useShadCN = false;
@@ -19,7 +19,7 @@ export function renderPackageJson(projectName: string = 'vite-react-ts', useTail
     },
     "dependencies": {${useTailwind ? `\n        "@tailwindcss/vite": "^4.1.8",` : ''}${useShadCN ? `\n        "class-variance-authority": "^0.7.1",\n        "clsx": "^2.1.1",\n        "lucide-react": "^0.514.0",` : ''}
         "react": "^19.0.0",
-        "react-dom": "^19.0.0"${useTailwind ? ',' : ''}${useShadCN ? `\n        "tailwind-merge": "^3.3.1",` : ''}${useTailwind ? '\n        "tailwindcss": "^4.1.8"' : ''}
+        "react-dom": "^19.0.0"${useTailwind || useRouter ? ',' : ''}${useRouter ? `\n        "react-router": "^7.6.2",` : ''}${useShadCN ? `\n        "tailwind-merge": "^3.3.1",` : ''}${useTailwind ? '\n        "tailwindcss": "^4.1.8"' : ''}
     },
     "devDependencies": {
         "@eslint/js": "^9.22.0",

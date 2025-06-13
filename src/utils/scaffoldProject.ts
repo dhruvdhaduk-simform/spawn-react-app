@@ -8,6 +8,9 @@ import { renderReadme } from '../templates/readme';
 import { renderViteConfigTs } from '../templates/viteConfig';
 import { renderIndexCSS } from '../templates/indexCSS';
 import { renderComponentsJson, renderSrcLibUtils } from '../templates/shadcn';
+import { renderRouterTsx } from '../templates/router';
+import { renderMainTsx } from '../templates/mainTsx';
+import { renderAppTsx } from '../templates/appTsx';
 
 import { logSuccess } from './logger';
 
@@ -30,6 +33,10 @@ export function scaffoldProject(userPrompts: UserPrompts): void {
         path.join(projectDir, '.prettierrc')
     );
 
+    const srcDir = path.join(projectDir, 'src');
+
+    fs.mkdirSync(srcDir, { recursive: true });
+
     fs.writeFileSync(
         path.join(projectDir, 'index.html'),
         renderIndexHtml(userPrompts.projectName)
@@ -39,7 +46,8 @@ export function scaffoldProject(userPrompts: UserPrompts): void {
         renderPackageJson(
             userPrompts.projectName,
             userPrompts.tailwind,
-            userPrompts.shadcn
+            userPrompts.shadcn,
+            userPrompts.router
         )
     );
     fs.writeFileSync(
@@ -51,7 +59,7 @@ export function scaffoldProject(userPrompts: UserPrompts): void {
         renderViteConfigTs(userPrompts.tailwind)
     );
     fs.writeFileSync(
-        path.join(projectDir, 'src', 'index.css'),
+        path.join(srcDir, 'index.css'),
         renderIndexCSS(userPrompts.tailwind, userPrompts.shadcn)
     );
 
@@ -65,6 +73,19 @@ export function scaffoldProject(userPrompts: UserPrompts): void {
         fs.mkdirSync(libDir, { recursive: true });
 
         fs.writeFileSync(path.join(libDir, 'utils.ts'), renderSrcLibUtils());
+    }
+
+    fs.writeFileSync(
+        path.join(srcDir, 'main.tsx'),
+        renderMainTsx(userPrompts.router)
+    );
+    fs.writeFileSync(
+        path.join(srcDir, 'App.tsx'),
+        renderAppTsx(userPrompts.router)
+    );
+
+    if (userPrompts.router) {
+        fs.writeFileSync(path.join(srcDir, 'router.tsx'), renderRouterTsx());
     }
 
     logSuccess(`Initialized your React project at ${projectDir}`);
