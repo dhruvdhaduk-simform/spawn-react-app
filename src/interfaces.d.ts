@@ -4,4 +4,8 @@ export interface UserPrompts {
     shadcn: boolean;
     router: boolean;
     redux: boolean;
+    redirect: {
+        netlify: boolean;
+        vercel: boolean;
+    };
 }

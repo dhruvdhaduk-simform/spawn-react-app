@@ -85,6 +85,43 @@ export async function promptUser(): Promise<UserPrompts> {
         throw new Error('Aborted.');
     }
 
+    const redirect: UserPrompts['redirect'] = {
+        netlify: false,
+        vercel: false,
+    };
+
+    if (routerResponse.router) {
+        const redirectResponse = await prompts({
+            type: 'multiselect',
+            name: 'redirect',
+            message:
+                'Select platforms for which you want to add Redirect Rules :',
+            choices: [
+                { title: 'Netlify', value: 'netlify' },
+                { title: 'Vercel', value: 'vercel' },
+            ],
+            instructions: false,
+            hint: '- Space to select. Return to submit',
+        });
+        console.log();
+
+        if (redirectResponse.redirect === undefined) {
+            throw new Error('Aborted.');
+        }
+
+        if (
+            Array.isArray(redirectResponse.redirect) &&
+            redirectResponse.redirect.every((item) => typeof item === 'string')
+        ) {
+            if (redirectResponse.redirect.includes('netlify')) {
+                redirect.netlify = true;
+            }
+            if (redirectResponse.redirect.includes('vercel')) {
+                redirect.vercel = true;
+            }
+        }
+    }
+
     const reduxResponse = await prompts({
         type: 'confirm',
         name: 'redux',
@@ -103,5 +140,6 @@ export async function promptUser(): Promise<UserPrompts> {
         shadcn: useShadCN,
         router: routerResponse.router,
         redux: reduxResponse.redux,
+        redirect,
     };
 }
