@@ -3,4 +3,5 @@ export interface UserPrompts {
     tailwind: boolean;
     shadcn: boolean;
     router: boolean;
+    redux: boolean;
 }

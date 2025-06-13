@@ -61,7 +61,7 @@ export async function promptUser(): Promise<UserPrompts> {
         const shadcnResponse = await prompts({
             type: 'confirm',
             name: 'shadcn',
-            message: 'Do you want ot use ShadCN ?',
+            message: 'Do you want to use ShadCN ?',
             initial: true,
         });
         console.log();
@@ -85,10 +85,23 @@ export async function promptUser(): Promise<UserPrompts> {
         throw new Error('Aborted.');
     }
 
+    const reduxResponse = await prompts({
+        type: 'confirm',
+        name: 'redux',
+        message: 'Do you want to use Redux Toolkit ?',
+        initial: true,
+    });
+    console.log();
+
+    if (reduxResponse.redux === undefined) {
+        throw new Error('Aborted.');
+    }
+
     return {
         projectName: projectNameResponse.projectName,
         tailwind: tailwindResponse.tailwind,
         shadcn: useShadCN,
         router: routerResponse.router,
+        redux: reduxResponse.redux,
     };
 }
